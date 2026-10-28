@@ -26,6 +26,8 @@ in
   home.sessionPath = [
     "/opt/homebrew/opt/rustup/bin"
     "$HOME/.cargo/bin"
+    # tfswitch links the selected terraform here
+    "$HOME/bin"
   ];
   # rustup ships no toolchain; install stable plus what rust-analyzer needs (no-op once present)
   home.activation.rustup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
