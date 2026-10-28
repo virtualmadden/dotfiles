@@ -15,13 +15,17 @@ My macOS setup, managed declaratively with [nix-darwin](https://github.com/nix-d
 ### System (`configuration.nix`)
 
 - macOS defaults: dark mode, fast key repeat, show all file extensions, autohiding Dock, Finder list view, no desktop icons, tap to click.
-- Homebrew is managed by nix-homebrew. `onActivation.cleanup = "zap"` means **anything not listed in `brews` or `casks` gets uninstalled** on rebuild.
+- `brews` lists only the tools used directly; Homebrew manages their dependencies. Rust comes from `rustup` (not the `rust` formula).
+- Homebrew is managed by nix-homebrew. `onActivation.cleanup = "zap"` means **anything not listed in `taps`, `brews`, or `casks` gets uninstalled** on rebuild.
 - Targets Apple Silicon (`aarch64-darwin`). Change `nixpkgs.hostPlatform` to `x86_64-darwin` for Intel.
 
 ### User (`home.nix`)
 
-- CLI tools from nixpkgs: `ripgrep`, `fd`, `fzf`, `jq`, `lazygit`, `neovim`, plus the Hack Nerd Font.
+- CLI tools from nixpkgs: `ripgrep`, `fd`, `fzf`, `jq`, `lazygit`, `podman`, `podman-compose`, plus the Hack Nerd Font.
+- nvm from Homebrew, loaded by the oh-my-zsh `nvm` plugin through a `~/.nvm/nvm.sh` link to brew's script; Node versions live in `~/.nvm`.
+- rustup's `cargo`/`rustc` proxies (`/opt/homebrew/opt/rustup/bin`) and `~/.cargo/bin` on `PATH`, since brew's `rustup` is keg-only. Rebuild installs the `stable` toolchain with `rust-analyzer` and `rust-src`.
 - zsh with autosuggestions (accept with `Ctrl+F`) and syntax highlighting.
+- oh-my-zsh with the `dotenv`, `brew`, `podman`, `nvm`, `gh`, and `git` plugins; no theme, since Starship owns the prompt.
 - Starship prompt.
 - Shell aliases:
 
@@ -34,6 +38,7 @@ My macOS setup, managed declaratively with [nix-darwin](https://github.com/nix-d
   | `m` | `git switch main` |
   | `cc` | `claude --dangerously-skip-permissions` |
   | `co` | `codex --full-auto` |
+  | `docker` | `podman` |
 
 ### App configs (`home/`)
 
@@ -45,6 +50,8 @@ These are linked with `mkOutOfStoreSymlink`, so the files in `~` point straight 
 | `home/.config/herdr/` | `~/.config/herdr` - herdr with tmux-style `Ctrl+B` keybindings |
 | `home/.claude/settings.json` | `~/.claude/settings.json` - Claude Code theme and status line |
 | `home/AGENTS.md` | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.config/opencode/AGENTS.md` - shared global instructions for coding agents |
+
+`home/CLAUDE.md` is not linked anywhere; it only points Claude Code at `home/AGENTS.md` when working inside `home/`.
 
 ## Setup
 
@@ -63,6 +70,13 @@ These are linked with `mkOutOfStoreSymlink`, so the files in `~` point straight 
    ln -sfn "$PWD" ~/.dotfiles
    sudo nix run nix-darwin/nix-darwin-26.05#darwin-rebuild -- switch --flake ~/.dotfiles#mac
    ```
+
+Podman runs in its own VM on macOS. After the first rebuild, create and start it:
+
+```sh
+podman machine init
+podman machine start
+```
 
 ## Day to day
 

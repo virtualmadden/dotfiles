@@ -8,7 +8,7 @@
   nixpkgs.hostPlatform = "aarch64-darwin"; # use x86_64-darwin for Intel CPU
 
   system.primaryUser = user;
-    users.users.${user} = {
+  users.users.${user} = {
     home = "/Users/${user}";
   };
   home-manager.backupFileExtension = "backup";
@@ -35,47 +35,20 @@
     onActivation.cleanup = "zap";  # remove anything not listed here
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
+    taps = [
+      "kunchenguid/tap"
+    ];
     brews = [
-      "autoconf"
-      "aws-c-auth"
-      "aws-c-cal"
-      "aws-c-common"
-      "aws-c-compression"
-      "aws-c-event-stream"
-      "aws-c-http"
-      "aws-c-io"
-      "aws-c-mqtt"
-      "aws-c-s3"
-      "aws-c-sdkutils"
-      "aws-checksums"
       "awscli"
-      "ca-certificates"
       "gh"
       "go"
       "herdr"
-      "libgit2"
-      "libssh2"
-      "llhttp"
-      "llvm"
-      "lz4"
-      "m4"
-      "mpdecimal"
       "neovim"
       "nvm"
-      "openssl@4"
-      "pkgconf"
       "pi-coding-agent"
-      "pyenv"
       "python@3.15"
-      "readline"
-      "rust"
       "rustup"
-      "s2n"
-      "sqlite"
       "tfswitch"
-      "xz"
-      "z3"
-      "zstd"
     ];
     casks = [
       "1password"
@@ -88,6 +61,7 @@
       "github"
       "gitkraken"
       "iterm2"
+      "kunchenguid/tap/baby-menu"
       "notion"
       "podman-desktop"
       "visual-studio-code"
