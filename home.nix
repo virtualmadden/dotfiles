@@ -41,6 +41,10 @@ in
     syntaxHighlighting.enable = true;  # commands turn green when valid
     initContent = ''
       bindkey '^f' autosuggest-accept
+
+      # nested login shells re-run brew shellenv, which pushes /opt/homebrew/bin
+      # (and brew's node) ahead of nvm; move nvm's node back to the front
+      [[ -n $NVM_BIN ]] && path=($NVM_BIN $path)
     '';
     oh-my-zsh = {
       enable = true;
