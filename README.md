@@ -10,7 +10,8 @@ My macOS setup, managed declaratively with [nix-darwin](https://github.com/nix-d
 | `configuration.nix` | System level: macOS defaults, Homebrew brews and casks. |
 | `home.nix` | User level (Home Manager): CLI packages, zsh, starship prompt, and symlinks for app configs. |
 | `home/` | Raw config files that get symlinked into `~`. |
-| `rebuild.sh` | Links this repo to `~/.dotfiles` and runs `darwin-rebuild switch`. |
+| `rebuild.sh` | Links this repo to `~/.dotfiles`, enables `.githooks/`, and runs `darwin-rebuild switch`. |
+| `.githooks/` | Git hooks. `pre-commit` blocks committing an `autoMode` block in `home/.claude/settings.json`; that belongs in `~/.claude/settings.local.json`. |
 
 ### System (`configuration.nix`)
 
@@ -68,6 +69,7 @@ These are linked with `mkOutOfStoreSymlink`, so the files in `~` point straight 
 
    ```sh
    ln -sfn "$PWD" ~/.dotfiles
+   git config core.hooksPath .githooks
    sudo nix run nix-darwin/nix-darwin-26.05#darwin-rebuild -- switch --flake ~/.dotfiles#mac
    ```
 
@@ -86,7 +88,7 @@ After changing any `.nix` file, rebuild:
 ./rebuild.sh
 ```
 
-This re-points `~/.dotfiles` at the repo and runs `sudo darwin-rebuild switch --flake ~/.dotfiles#mac`. Files that Home Manager would overwrite are moved aside with a `.backup` extension.
+This re-points `~/.dotfiles` at the repo, enables the git hooks in `.githooks/`, and runs `sudo darwin-rebuild switch --flake ~/.dotfiles#mac`. Files that Home Manager would overwrite are moved aside with a `.backup` extension.
 
 To add a Homebrew package or app, add it to `brews` or `casks` in `configuration.nix` and rebuild. To remove one, delete it from the list; the `zap` cleanup uninstalls it.
 

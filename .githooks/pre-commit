@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Block committing an autoMode block in the shared Claude settings.
+# /auto-mode-setup writes to ~/.claude/settings.json, which links into this
+# public repo; that config belongs in ~/.claude/settings.local.json instead.
+set -euo pipefail
+
+file=home/.claude/settings.json
+
+git diff --cached --name-only --diff-filter=ACMR | grep -qxF "$file" || exit 0
+
+if git show ":$file" | jq -e 'has("autoMode")' >/dev/null; then
+  echo "pre-commit: $file contains an autoMode block." >&2
+  echo "Move it to ~/.claude/settings.local.json, or discard it with:" >&2
+  echo "  git checkout -- $file" >&2
+  exit 1
+fi
