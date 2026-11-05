@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+# This repo is public, so scan staged changes for secrets before they land.
+if ! command -v gitleaks >/dev/null; then
+  echo "pre-commit: gitleaks not found; run ./rebuild.sh to install it." >&2
+  exit 1
+fi
+gitleaks git --pre-commit --staged --redact --verbose --no-banner --log-level warn
+
 # Block committing an autoMode block in the shared Claude settings.
 # /auto-mode-setup writes to ~/.claude/settings.json, which links into this
 # public repo; that config belongs in ~/.claude/settings.local.json instead.
-set -euo pipefail
-
 file=home/.claude/settings.json
 
 git diff --cached --name-only --diff-filter=ACMR | grep -qxF "$file" || exit 0

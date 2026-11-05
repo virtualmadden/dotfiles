@@ -14,6 +14,7 @@ in
     fd        # fast find
     fzf       # fuzzy finder
     jq        # json on the command line
+    gitleaks  # secret scanning in the dotfiles pre-commit hook
     lazygit
     podman
     podman-compose

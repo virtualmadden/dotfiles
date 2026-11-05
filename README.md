@@ -11,7 +11,7 @@ My macOS setup, managed declaratively with [nix-darwin](https://github.com/nix-d
 | `home.nix` | User level (Home Manager): CLI packages, zsh, starship prompt, and symlinks for app configs. |
 | `home/` | Raw config files that get symlinked into `~`. |
 | `rebuild.sh` | Links this repo to `~/.dotfiles`, enables `.githooks/`, and runs `darwin-rebuild switch`. |
-| `.githooks/` | Git hooks. `pre-commit` blocks committing an `autoMode` block in `home/.claude/settings.json`; that belongs in `~/.claude/settings.local.json`. |
+| `.githooks/` | Git hooks. `pre-commit` scans staged changes for secrets with `gitleaks` and blocks committing an `autoMode` block in `home/.claude/settings.json`; that belongs in `~/.claude/settings.local.json`. |
 
 ### System (`configuration.nix`)
 
@@ -22,7 +22,7 @@ My macOS setup, managed declaratively with [nix-darwin](https://github.com/nix-d
 
 ### User (`home.nix`)
 
-- CLI tools from nixpkgs: `ripgrep`, `fd`, `fzf`, `jq`, `lazygit`, `podman`, `podman-compose`, plus the Hack Nerd Font.
+- CLI tools from nixpkgs: `ripgrep`, `fd`, `fzf`, `jq`, `gitleaks`, `lazygit`, `podman`, `podman-compose`, plus the Hack Nerd Font.
 - nvm from Homebrew, loaded by the oh-my-zsh `nvm` plugin through a `~/.nvm/nvm.sh` link to brew's script; Node versions live in `~/.nvm`.
 - rustup's `cargo`/`rustc` proxies (`/opt/homebrew/opt/rustup/bin`) and `~/.cargo/bin` on `PATH`, since brew's `rustup` is keg-only. Rebuild installs the `stable` toolchain with `rust-analyzer` and `rust-src`.
 - zsh with autosuggestions (accept with `Ctrl+F`) and syntax highlighting.
