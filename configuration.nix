@@ -37,6 +37,7 @@
     onActivation.extraFlags = [ "--force" ];
     taps = [
       "kunchenguid/tap"
+      "virtualmadden/tap"
     ];
     brews = [
       "awscli"
@@ -49,6 +50,7 @@
       "python@3.15"
       "rustup"
       "tfswitch"
+      "virtualmadden/tap/gac-redux"
     ];
     casks = [
       "1password"
