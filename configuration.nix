@@ -49,6 +49,7 @@
       "python@3.15"
       "rustup"
       "tfswitch"
+      "wimlib"
       "virtualmadden/tap/gac-redux"
     ];
     casks = [
