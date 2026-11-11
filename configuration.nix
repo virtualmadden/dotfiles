@@ -40,6 +40,7 @@
     ];
     brews = [
       "awscli"
+      "biome"
       "gh"
       "go"
       "herdr"
@@ -50,6 +51,7 @@
       "python@3.15"
       "rustup"
       "tfswitch"
+      "treehouse"
       "wimlib"
       "virtualmadden/tap/gac-redux"
     ];
@@ -61,6 +63,8 @@
       "claude-code"
       "cursor"
       "discord"
+      "elgato-stream-deck"
+      "equinox"
       "github"
       "handy"
       "insta360-link-controller"
