@@ -7,23 +7,30 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.hostPlatform = "aarch64-darwin"; # use x86_64-darwin for Intel CPU
 
-  system.primaryUser = user;
   users.users.${user} = {
     home = "/Users/${user}";
   };
+  # touch id for sudo; reattach makes it work inside herdr/tmux sessions too
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
   home-manager.backupFileExtension = "backup";
-  system.stateVersion = 6;
-  system.defaults = {
-    NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
-      KeyRepeat = 2;          # fast key repeat
-      InitialKeyRepeat = 15;  # short delay before repeat
-      AppleShowAllExtensions = true;
+  system = {
+    primaryUser = user;
+    stateVersion = 6;
+    defaults = {
+      NSGlobalDomain = {
+        AppleInterfaceStyle = "Dark";
+        KeyRepeat = 2;          # fast key repeat
+        InitialKeyRepeat = 15;  # short delay before repeat
+        AppleShowAllExtensions = true;
+      };
+      dock.autohide = true;
+      finder.FXPreferredViewStyle = "Nlsv";  # list view by default
+      finder.CreateDesktop = false;          # clean desktop
+      trackpad.Clicking = true;              # tap to click
     };
-    dock.autohide = true;
-    finder.FXPreferredViewStyle = "Nlsv";  # list view by default
-    finder.CreateDesktop = false;          # clean desktop
-    trackpad.Clicking = true;              # tap to click
   };
   nix-homebrew = {
     enable = true;
@@ -32,9 +39,11 @@
   };
   homebrew = {
     enable = true;
-    onActivation.cleanup = "zap";  # remove anything not listed here
-    onActivation.autoUpdate = true;
-    onActivation.extraFlags = [ "--force" ];
+    onActivation = {
+      cleanup = "zap";  # remove anything not listed here
+      autoUpdate = true;
+      extraFlags = [ "--force" ];
+    };
     taps = [
       "virtualmadden/tap"
     ];
