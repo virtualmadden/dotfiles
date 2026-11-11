@@ -85,8 +85,6 @@ in
   };
 
   # Edit-in-place: the real file stays in my repo, ~/.config just points at it.
-  home.file.".config/wezterm".source =
-    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/wezterm";
   # brew's nvm keeps nvm.sh outside NVM_DIR; the oh-my-zsh nvm plugin loads it from ~/.nvm
   home.file.".nvm/nvm.sh".source =
     config.lib.file.mkOutOfStoreSymlink "/opt/homebrew/opt/nvm/libexec/nvm.sh";

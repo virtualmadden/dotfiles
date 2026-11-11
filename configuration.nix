@@ -62,12 +62,10 @@
       "discord"
       "github"
       "gitkraken"
-      "iterm2"
       "kunchenguid/tap/baby-menu"
       "notion"
       "podman-desktop"
       "visual-studio-code"
-      "wezterm"
     ];
   };
 }

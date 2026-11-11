@@ -47,7 +47,6 @@ These are linked with `mkOutOfStoreSymlink`, so the files in `~` point straight 
 
 | Repo file | Linked to |
 | --- | --- |
-| `home/.config/wezterm/` | `~/.config/wezterm` - WezTerm (rose-pine-moon, translucent, dims unfocused windows) |
 | `home/.config/herdr/` | `~/.config/herdr` - herdr with tmux-style `Ctrl+B` keybindings |
 | `home/.claude/settings.json` | `~/.claude/settings.json` - Claude Code theme and status line |
 | `home/AGENTS.md` | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.config/opencode/AGENTS.md` - shared global instructions for coding agents |
