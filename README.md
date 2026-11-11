@@ -48,7 +48,7 @@ These are linked with `mkOutOfStoreSymlink`, so the files in `~` point straight 
 | Repo file | Linked to |
 | --- | --- |
 | `home/.config/herdr/` | `~/.config/herdr` - herdr with tmux-style `Ctrl+B` keybindings |
-| `home/.claude/settings.json` | `~/.claude/settings.json` - Claude Code theme and status line |
+| `home/.claude/settings.json` | `~/.claude/settings.json` - Claude Code theme, status line, hooks, and plugins |
 | `home/AGENTS.md` | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.config/opencode/AGENTS.md` - shared global instructions for coding agents |
 
 `home/CLAUDE.md` is not linked anywhere; it only points Claude Code at `home/AGENTS.md` when working inside `home/`.
