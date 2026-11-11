@@ -61,7 +61,6 @@
       "cursor"
       "discord"
       "github"
-      "gitkraken"
       "notion"
       "podman-desktop"
       "visual-studio-code"
