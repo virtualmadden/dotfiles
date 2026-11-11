@@ -64,7 +64,6 @@
       "cursor"
       "discord"
       "elgato-stream-deck"
-      "equinox"
       "github"
       "handy"
       "insta360-link-controller"
