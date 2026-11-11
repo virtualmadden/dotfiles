@@ -16,13 +16,13 @@ My macOS setup, managed declaratively with [nix-darwin](https://github.com/nix-d
 ### System (`configuration.nix`)
 
 - macOS defaults: dark mode, fast key repeat, show all file extensions, autohiding Dock, Finder list view, no desktop icons, tap to click.
-- `brews` lists only the tools used directly; Homebrew manages their dependencies. Rust comes from `rustup` (not the `rust` formula).
+- `brews` lists only the tools used directly; Homebrew manages their dependencies. Rust comes from `rustup` (not the `rust` formula). Podman comes from brew rather than nixpkgs because brew's build includes `krunkit`, which the libkrun podman machine needs.
 - Homebrew is managed by nix-homebrew. `onActivation.cleanup = "zap"` means **anything not listed in `taps`, `brews`, or `casks` gets uninstalled** on rebuild.
 - Targets Apple Silicon (`aarch64-darwin`). Change `nixpkgs.hostPlatform` to `x86_64-darwin` for Intel.
 
 ### User (`home.nix`)
 
-- CLI tools from nixpkgs: `ripgrep`, `fd`, `fzf`, `jq`, `gitleaks`, `lazygit`, `podman`, `podman-compose`, plus the Hack Nerd Font.
+- CLI tools from nixpkgs: `ripgrep`, `fd`, `fzf`, `jq`, `gitleaks`, `lazygit`, `podman-compose`, plus the Hack Nerd Font.
 - nvm from Homebrew, loaded by the oh-my-zsh `nvm` plugin through a `~/.nvm/nvm.sh` link to brew's script; Node versions live in `~/.nvm`.
 - rustup's `cargo`/`rustc` proxies (`/opt/homebrew/opt/rustup/bin`) and `~/.cargo/bin` on `PATH`, since brew's `rustup` is keg-only. Rebuild installs the `stable` toolchain with `rust-analyzer` and `rust-src`.
 - zsh with autosuggestions (accept with `Ctrl+F`) and syntax highlighting.

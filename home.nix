@@ -16,7 +16,6 @@ in
     jq        # json on the command line
     gitleaks  # secret scanning in the dotfiles pre-commit hook
     lazygit
-    podman
     podman-compose
     # the font everything renders in
     nerd-fonts.hack

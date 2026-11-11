@@ -46,6 +46,7 @@
       "neovim"
       "nvm"
       "pi-coding-agent"
+      "podman"  # brew's build ships krunkit for the libkrun machine; nixpkgs' does not
       "python@3.15"
       "rustup"
       "tfswitch"
