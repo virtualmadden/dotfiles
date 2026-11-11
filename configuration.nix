@@ -36,7 +36,6 @@
     onActivation.autoUpdate = true;
     onActivation.extraFlags = [ "--force" ];
     taps = [
-      "kunchenguid/tap"
       "virtualmadden/tap"
     ];
     brews = [
@@ -62,7 +61,6 @@
       "discord"
       "github"
       "gitkraken"
-      "kunchenguid/tap/baby-menu"
       "notion"
       "podman-desktop"
       "visual-studio-code"
